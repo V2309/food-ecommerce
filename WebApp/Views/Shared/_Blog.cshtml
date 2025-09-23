@@ -1,0 +1,42 @@
+﻿
+@using WebApp.Models;
+@{
+    ProductDBContext dBContext = new ProductDBContext();
+    List<Blog> blog = dBContext.Blogs.OrderByDescending(bv =>bv.dateCurrent).Take(3).ToList();
+   
+}
+<div class="grid__row">
+    @foreach (var item in blog)
+    {
+        <div class="col-sm-4" style="padding-right:10px;padding-left:10px;">
+            <div class="picture-blog">
+                <a href="#" class="img-blog">
+                    <img src="~/images/img-blog/@item.img" loading="lazy" />
+
+                </a>
+                <div class="date-blog">
+                    <span class="day">
+                        25
+                    </span>
+                    <span class="month">
+                        Dec
+                    </span>
+                    <span class="year">
+                        24
+                    </span>
+                </div>
+            </div>
+            <div class="info-blog">
+                <a href="#" class="name-blog">
+                    @item.nameBlog
+                </a>
+                <p>
+                    @item.mainContent
+                </p>
+            </div>
+        </div>
+
+
+    }
+
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="59bab89a39df4f2c81140776823f2c77" Name="Diagram1" ZoomLevel="83">
+        <EntityTypeShape EntityType="Models.Cart" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.OrderDetail" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Pro_Category" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Product_Group" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.ProductInfo" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.RoleMaster" Width="1.5" PointX="7.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.User_Web" Width="1.5" PointX="12.875" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.UserRolesMapping" Width="1.5" PointX="10" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="Models.FK_OrderDetail_ProductInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_ProductGroup_Pro_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_Productinfo_Pro_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK_ProductInfo_Pro_group" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__UserRoles__RoleI__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FK__UserRoles__UserI__04E4BC85" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Models.Blog" Width="1.5" PointX="11.75" PointY="1.25" />
+        <EntityTypeShape EntityType="Models.TheOrder" Width="1.5" PointX="3.875" PointY="4.75" />
+        <AssociationConnector Association="Models.FK_OrderDetail_Orders1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

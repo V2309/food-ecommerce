@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="idBlog" />
+          </Key>
+          <Property Name="idBlog" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nameBlog" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="shortContent" Type="nvarchar" MaxLength="2000" />
+          <Property Name="dateCurrent" Type="datetime" />
+          <Property Name="typeBlog" Type="nvarchar" MaxLength="30" />
+          <Property Name="img" Type="varchar" MaxLength="50" />
+          <Property Name="mainContent" Type="nvarchar(max)" />
+          <Property Name="isPassing" Type="bit" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="id_giohang" />
+          </Key>
+          <Property Name="id_sanpham" Type="int" Nullable="false" />
+          <Property Name="id_giohang" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="soLuong" Type="int" />
+          <Property Name="tinhtrang" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="id_donhang" />
+            <PropertyRef Name="id_sanpham" />
+          </Key>
+          <Property Name="id_donhang" Type="int" Nullable="false" />
+          <Property Name="id_sanpham" Type="int" Nullable="false" />
+          <Property Name="thanhtien" Type="float" />
+          <Property Name="soluong" Type="int" />
+        </EntityType>
+        <EntityType Name="Pro_Category">
+          <Key>
+            <PropertyRef Name="id_loai_sp" />
+          </Key>
+          <Property Name="id_loai_sp" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tenloaisp" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Product_Group">
+          <Key>
+            <PropertyRef Name="id_nhomsp" />
+          </Key>
+          <Property Name="id_loaisp" Type="varchar" MaxLength="20" />
+          <Property Name="id_nhomsp" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="tennhom" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="id_sanpham" />
+          </Key>
+          <Property Name="id_sanpham" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="giacu" Type="float" />
+          <Property Name="giamoi" Type="float" />
+          <Property Name="ten_sanpham" Type="nvarchar" MaxLength="200" />
+          <Property Name="id_loai_sanpham" Type="varchar" MaxLength="20" />
+          <Property Name="hinh_sanpham" Type="varchar" MaxLength="10" />
+          <Property Name="hinh_quatang" Type="varchar" MaxLength="10" />
+          <Property Name="thongtin_km" Type="nvarchar" MaxLength="50" />
+          <Property Name="soluong" Type="int" />
+          <Property Name="id_nhomsp" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RollName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TheOrder">
+          <Key>
+            <PropertyRef Name="id_donhang" />
+          </Key>
+          <Property Name="id_donhang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tendondang" Type="nvarchar" MaxLength="200" />
+          <Property Name="ngay" Type="datetime" />
+          <Property Name="hinhthuc_thanhtoan" Type="nvarchar" MaxLength="200" />
+          <Property Name="Statuss" Type="nvarchar" MaxLength="200" />
+          <Property Name="tenkhachhang" Type="nvarchar" MaxLength="50" />
+          <Property Name="sdt" Type="varchar" MaxLength="12" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="diachi" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="User_Web">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ten_taikhoan" Type="varchar" MaxLength="100" />
+          <Property Name="matkhau" Type="varchar" MaxLength="100" />
+          <Property Name="SDT" Type="varchar" MaxLength="15" />
+          <Property Name="hoTen" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="UserRolesMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__UserRoles__RoleI__4E88ABD4">
+          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="1" />
+          <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__RoleI__5070F446">
+          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="1" />
+          <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__RoleI__5441852A">
+          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="1" />
+          <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__UserI__534D60F1">
+          <End Role="User_Web" Type="Self.User_Web" Multiplicity="1" />
+          <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Web">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_Orders">
+          <End Role="TheOrder" Type="Self.TheOrder" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheOrder">
+              <PropertyRef Name="id_donhang" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="id_donhang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetail_ProductInfo">
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductInfo">
+              <PropertyRef Name="id_sanpham" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="id_sanpham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductGroup_Pro_Category">
+          <End Role="Pro_Category" Type="Self.Pro_Category" Multiplicity="0..1" />
+          <End Role="Product_Group" Type="Self.Product_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pro_Category">
+              <PropertyRef Name="id_loai_sp" />
+            </Principal>
+            <Dependent Role="Product_Group">
+              <PropertyRef Name="id_loaisp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productinfo_Pro_Category">
+          <End Role="Pro_Category" Type="Self.Pro_Category" Multiplicity="0..1" />
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pro_Category">
+              <PropertyRef Name="id_loai_sp" />
+            </Principal>
+            <Dependent Role="ProductInfo">
+              <PropertyRef Name="id_loai_sanpham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductInfo_Pro_group">
+          <End Role="Product_Group" Type="Self.Product_Group" Multiplicity="0..1" />
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Group">
+              <PropertyRef Name="id_nhomsp" />
+            </Principal>
+            <Dependent Role="ProductInfo">
+              <PropertyRef Name="id_nhomsp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelsStoreContainer">
+          <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pro_Category" EntityType="Self.Pro_Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Group" EntityType="Self.Product_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleMaster" EntityType="Self.RoleMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TheOrder" EntityType="Self.TheOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Web" EntityType="Self.User_Web" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRolesMapping" EntityType="Self.UserRolesMapping" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__UserRoles__RoleI__4E88ABD4" Association="Self.FK__UserRoles__RoleI__4E88ABD4">
+            <End Role="RoleMaster" EntitySet="RoleMaster" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__RoleI__5070F446" Association="Self.FK__UserRoles__RoleI__5070F446">
+            <End Role="RoleMaster" EntitySet="RoleMaster" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__RoleI__5441852A" Association="Self.FK__UserRoles__RoleI__5441852A">
+            <End Role="RoleMaster" EntitySet="RoleMaster" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__UserI__534D60F1" Association="Self.FK__UserRoles__UserI__534D60F1">
+            <End Role="User_Web" EntitySet="User_Web" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_Orders" Association="Self.FK_OrderDetail_Orders">
+            <End Role="TheOrder" EntitySet="TheOrder" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetail_ProductInfo" Association="Self.FK_OrderDetail_ProductInfo">
+            <End Role="ProductInfo" EntitySet="ProductInfo" />
+            <End Role="OrderDetail" EntitySet="OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductGroup_Pro_Category" Association="Self.FK_ProductGroup_Pro_Category">
+            <End Role="Pro_Category" EntitySet="Pro_Category" />
+            <End Role="Product_Group" EntitySet="Product_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productinfo_Pro_Category" Association="Self.FK_Productinfo_Pro_Category">
+            <End Role="Pro_Category" EntitySet="Pro_Category" />
+            <End Role="ProductInfo" EntitySet="ProductInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInfo_Pro_group" Association="Self.FK_ProductInfo_Pro_group">
+            <End Role="Product_Group" EntitySet="Product_Group" />
+            <End Role="ProductInfo" EntitySet="ProductInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="id_giohang" />
+          </Key>
+          <Property Name="id_sanpham" Type="Int32" Nullable="false" />
+          <Property Name="id_giohang" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="soLuong" Type="Int32" />
+          <Property Name="tinhtrang" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="id_donhang" />
+            <PropertyRef Name="id_sanpham" />
+          </Key>
+          <Property Name="id_donhang" Type="Int32" Nullable="false" />
+          <Property Name="id_sanpham" Type="Int32" Nullable="false" />
+          <Property Name="thanhtien" Type="Double" />
+          <Property Name="soluong" Type="Int32" />
+          <NavigationProperty Name="ProductInfo" Relationship="Self.FK_OrderDetail_ProductInfo" FromRole="OrderDetail" ToRole="ProductInfo" />
+          <NavigationProperty Name="TheOrder" Relationship="Models.FK_OrderDetail_Orders1" FromRole="OrderDetail" ToRole="TheOrder" />
+        </EntityType>
+        <EntityType Name="Pro_Category">
+          <Key>
+            <PropertyRef Name="id_loai_sp" />
+          </Key>
+          <Property Name="id_loai_sp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tenloaisp" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product_Group" Relationship="Self.FK_ProductGroup_Pro_Category" FromRole="Pro_Category" ToRole="Product_Group" />
+          <NavigationProperty Name="ProductInfoes" Relationship="Self.FK_Productinfo_Pro_Category" FromRole="Pro_Category" ToRole="ProductInfo" />
+        </EntityType>
+        <EntityType Name="Product_Group">
+          <Key>
+            <PropertyRef Name="id_nhomsp" />
+          </Key>
+          <Property Name="id_loaisp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="id_nhomsp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tennhom" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pro_Category" Relationship="Self.FK_ProductGroup_Pro_Category" FromRole="Product_Group" ToRole="Pro_Category" />
+          <NavigationProperty Name="ProductInfoes" Relationship="Self.FK_ProductInfo_Pro_group" FromRole="Product_Group" ToRole="ProductInfo" />
+        </EntityType>
+        <EntityType Name="ProductInfo">
+          <Key>
+            <PropertyRef Name="id_sanpham" />
+          </Key>
+          <Property Name="id_sanpham" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="giacu" Type="Double" />
+          <Property Name="giamoi" Type="Double" />
+          <Property Name="ten_sanpham" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="id_loai_sanpham" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="hinh_sanpham" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="hinh_quatang" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="thongtin_km" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_nhomsp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetail_ProductInfo" FromRole="ProductInfo" ToRole="OrderDetail" />
+          <NavigationProperty Name="Pro_Category" Relationship="Self.FK_Productinfo_Pro_Category" FromRole="ProductInfo" ToRole="Pro_Category" />
+          <NavigationProperty Name="Product_Group" Relationship="Self.FK_ProductInfo_Pro_group" FromRole="ProductInfo" ToRole="Product_Group" />
+          <Property Name="soluong" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RoleMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RollName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserRolesMappings" Relationship="Self.FK__UserRoles__RoleI__05D8E0BE" FromRole="RoleMaster" ToRole="UserRolesMapping" />
+        </EntityType>
+        <EntityType Name="User_Web">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ten_taikhoan" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="matkhau" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SDT" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="hoTen" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRolesMappings" Relationship="Self.FK__UserRoles__UserI__04E4BC85" FromRole="User_Web" ToRole="UserRolesMapping" />
+        </EntityType>
+        <EntityType Name="UserRolesMapping">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RoleMaster" Relationship="Self.FK__UserRoles__RoleI__05D8E0BE" FromRole="UserRolesMapping" ToRole="RoleMaster" />
+          <NavigationProperty Name="User_Web" Relationship="Self.FK__UserRoles__UserI__04E4BC85" FromRole="UserRolesMapping" ToRole="User_Web" />
+        </EntityType>
+        <Association Name="FK_OrderDetail_ProductInfo">
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
+          <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductInfo">
+              <PropertyRef Name="id_sanpham" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="id_sanpham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductGroup_Pro_Category">
+          <End Role="Pro_Category" Type="Self.Pro_Category" Multiplicity="0..1" />
+          <End Role="Product_Group" Type="Self.Product_Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pro_Category">
+              <PropertyRef Name="id_loai_sp" />
+            </Principal>
+            <Dependent Role="Product_Group">
+              <PropertyRef Name="id_loaisp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Productinfo_Pro_Category">
+          <End Role="Pro_Category" Type="Self.Pro_Category" Multiplicity="0..1" />
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pro_Category">
+              <PropertyRef Name="id_loai_sp" />
+            </Principal>
+            <Dependent Role="ProductInfo">
+              <PropertyRef Name="id_loai_sanpham" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductInfo_Pro_group">
+          <End Role="Product_Group" Type="Self.Product_Group" Multiplicity="0..1" />
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product_Group">
+              <PropertyRef Name="id_nhomsp" />
+            </Principal>
+            <Dependent Role="ProductInfo">
+              <PropertyRef Name="id_nhomsp" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__RoleI__05D8E0BE">
+          <End Role="RoleMaster" Type="Self.RoleMaster" Multiplicity="1" />
+          <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleMaster">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserRoles__UserI__04E4BC85">
+          <End Role="User_Web" Type="Self.User_Web" Multiplicity="1" />
+          <End Role="UserRolesMapping" Type="Self.UserRolesMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Web">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="UserRolesMapping">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProductDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carts" EntityType="Self.Cart" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Pro_Category" EntityType="Self.Pro_Category" />
+          <EntitySet Name="Product_Group" EntityType="Self.Product_Group" />
+          <EntitySet Name="ProductInfoes" EntityType="Self.ProductInfo" />
+          <EntitySet Name="RoleMasters" EntityType="Self.RoleMaster" />
+          <EntitySet Name="User_Web" EntityType="Self.User_Web" />
+          <EntitySet Name="UserRolesMappings" EntityType="Self.UserRolesMapping" />
+          <AssociationSet Name="FK_OrderDetail_ProductInfo" Association="Self.FK_OrderDetail_ProductInfo">
+            <End Role="ProductInfo" EntitySet="ProductInfoes" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductGroup_Pro_Category" Association="Self.FK_ProductGroup_Pro_Category">
+            <End Role="Pro_Category" EntitySet="Pro_Category" />
+            <End Role="Product_Group" EntitySet="Product_Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Productinfo_Pro_Category" Association="Self.FK_Productinfo_Pro_Category">
+            <End Role="Pro_Category" EntitySet="Pro_Category" />
+            <End Role="ProductInfo" EntitySet="ProductInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductInfo_Pro_group" Association="Self.FK_ProductInfo_Pro_group">
+            <End Role="Product_Group" EntitySet="Product_Group" />
+            <End Role="ProductInfo" EntitySet="ProductInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__RoleI__05D8E0BE" Association="Self.FK__UserRoles__RoleI__05D8E0BE">
+            <End Role="RoleMaster" EntitySet="RoleMasters" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserRoles__UserI__04E4BC85" Association="Self.FK__UserRoles__UserI__04E4BC85">
+            <End Role="User_Web" EntitySet="User_Web" />
+            <End Role="UserRolesMapping" EntitySet="UserRolesMappings" />
+          </AssociationSet>
+          <EntitySet Name="Blogs" EntityType="Models.Blog" />
+          <EntitySet Name="TheOrders" EntityType="Models.TheOrder" />
+          <AssociationSet Name="FK_OrderDetail_Orders1" Association="Models.FK_OrderDetail_Orders1">
+            <End Role="TheOrder" EntitySet="TheOrders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="idBlog" />
+          </Key>
+          <Property Name="idBlog" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nameBlog" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="shortContent" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="dateCurrent" Type="DateTime" Precision="3" />
+          <Property Name="typeBlog" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="img" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mainContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isPassing" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="TheOrder">
+          <Key>
+            <PropertyRef Name="id_donhang" />
+          </Key>
+          <Property Name="id_donhang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tendondang" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ngay" Type="DateTime" Precision="3" />
+          <Property Name="hinhthuc_thanhtoan" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Statuss" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="tenkhachhang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sdt" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="diachi" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderDetails" Relationship="Models.FK_OrderDetail_Orders1" FromRole="TheOrder" ToRole="OrderDetail" />
+        </EntityType>
+        <Association Name="FK_OrderDetail_Orders1">
+          <End Type="Models.TheOrder" Role="TheOrder" Multiplicity="1" />
+          <End Type="Models.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TheOrder">
+              <PropertyRef Name="id_donhang" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="id_donhang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="ProductDBContext">
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="Models.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="id_sanpham" ColumnName="id_sanpham" />
+                <ScalarProperty Name="id_giohang" ColumnName="id_giohang" />
+                <ScalarProperty Name="soLuong" ColumnName="soLuong" />
+                <ScalarProperty Name="tinhtrang" ColumnName="tinhtrang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="Models.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetail">
+                <ScalarProperty Name="id_donhang" ColumnName="id_donhang" />
+                <ScalarProperty Name="id_sanpham" ColumnName="id_sanpham" />
+                <ScalarProperty Name="thanhtien" ColumnName="thanhtien" />
+                <ScalarProperty Name="soluong" ColumnName="soluong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pro_Category">
+            <EntityTypeMapping TypeName="Models.Pro_Category">
+              <MappingFragment StoreEntitySet="Pro_Category">
+                <ScalarProperty Name="id_loai_sp" ColumnName="id_loai_sp" />
+                <ScalarProperty Name="tenloaisp" ColumnName="tenloaisp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Group">
+            <EntityTypeMapping TypeName="Models.Product_Group">
+              <MappingFragment StoreEntitySet="Product_Group">
+                <ScalarProperty Name="id_loaisp" ColumnName="id_loaisp" />
+                <ScalarProperty Name="id_nhomsp" ColumnName="id_nhomsp" />
+                <ScalarProperty Name="tennhom" ColumnName="tennhom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductInfoes">
+            <EntityTypeMapping TypeName="Models.ProductInfo">
+              <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="soluong" ColumnName="soluong" />
+                <ScalarProperty Name="id_sanpham" ColumnName="id_sanpham" />
+                <ScalarProperty Name="giacu" ColumnName="giacu" />
+                <ScalarProperty Name="giamoi" ColumnName="giamoi" />
+                <ScalarProperty Name="ten_sanpham" ColumnName="ten_sanpham" />
+                <ScalarProperty Name="id_loai_sanpham" ColumnName="id_loai_sanpham" />
+                <ScalarProperty Name="hinh_sanpham" ColumnName="hinh_sanpham" />
+                <ScalarProperty Name="hinh_quatang" ColumnName="hinh_quatang" />
+                <ScalarProperty Name="thongtin_km" ColumnName="thongtin_km" />
+                <ScalarProperty Name="id_nhomsp" ColumnName="id_nhomsp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleMasters">
+            <EntityTypeMapping TypeName="Models.RoleMaster">
+              <MappingFragment StoreEntitySet="RoleMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RollName" ColumnName="RollName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Web">
+            <EntityTypeMapping TypeName="Models.User_Web">
+              <MappingFragment StoreEntitySet="User_Web">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="ten_taikhoan" ColumnName="ten_taikhoan" />
+                <ScalarProperty Name="matkhau" ColumnName="matkhau" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="hoTen" ColumnName="hoTen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRolesMappings">
+            <EntityTypeMapping TypeName="Models.UserRolesMapping">
+              <MappingFragment StoreEntitySet="UserRolesMapping">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="Models.Blog">
+              <MappingFragment StoreEntitySet="Blog">
+                <ScalarProperty Name="isPassing" ColumnName="isPassing" />
+                <ScalarProperty Name="mainContent" ColumnName="mainContent" />
+                <ScalarProperty Name="img" ColumnName="img" />
+                <ScalarProperty Name="typeBlog" ColumnName="typeBlog" />
+                <ScalarProperty Name="dateCurrent" ColumnName="dateCurrent" />
+                <ScalarProperty Name="shortContent" ColumnName="shortContent" />
+                <ScalarProperty Name="nameBlog" ColumnName="nameBlog" />
+                <ScalarProperty Name="idBlog" ColumnName="idBlog" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TheOrders">
+            <EntityTypeMapping TypeName="Models.TheOrder">
+              <MappingFragment StoreEntitySet="TheOrder">
+                <ScalarProperty Name="diachi" ColumnName="diachi" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="sdt" ColumnName="sdt" />
+                <ScalarProperty Name="tenkhachhang" ColumnName="tenkhachhang" />
+                <ScalarProperty Name="Statuss" ColumnName="Statuss" />
+                <ScalarProperty Name="hinhthuc_thanhtoan" ColumnName="hinhthuc_thanhtoan" />
+                <ScalarProperty Name="ngay" ColumnName="ngay" />
+                <ScalarProperty Name="tendondang" ColumnName="tendondang" />
+                <ScalarProperty Name="id_donhang" ColumnName="id_donhang" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

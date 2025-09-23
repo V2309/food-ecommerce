@@ -1,0 +1,169 @@
+﻿    @using WebApp.Models;
+    @{
+        ViewBag.Title = "Giỏ hàng";
+    }
+    <div class="app__container">
+        <div class="cart-content">
+            @{
+                if (Session["Carts"] != null)
+                {
+                    using (Html.BeginForm("UpdateCart", "ShoppingCart", FormMethod.Post))
+                    {
+                        <div class="title-head">
+                            Giỏ Hàng Của Bạn
+                        </div>
+                        <div class="block">
+                            <div class="block-product">
+                                <h4>Hàng Có Sẵn </h4>
+                                @foreach (var cart in (List<Carts>)Session["Carts"])
+                                {
+                                    double p = Convert.ToDouble(cart.Product.giamoi);
+                                    int q = Convert.ToInt32(cart.Quantity);
+                                    double subtotal = p * q;
+                                    <div class="added">
+                                        <div class="img-pro">
+                                            <img src="~/images/Products/@cart.Product.hinh_sanpham" alt="">
+                                        </div>
+                                        <div class="info">
+                                            <a class="name">
+                                                <small>Có sẵn</small>
+                                                @cart.Product.ten_sanpham
+                                            </a>
+
+                                        </div>
+                                        <div class="preserve">
+                                            <i class="fas fa-snowflake" style="margin-left: 5px;"></i>
+
+                                            Bảo quản ở nơi đông lạnh
+                                        </div>
+                                        <div class="colmoney">
+                                            <span id="errmsg" style="color:red;font-size:14px;position:absolute;bottom:-22px;width:200px"></span>
+                                            <div class="money"><strong>@Html.FormatValue(subtotal, "{0:#,##0.000}")₫</strong></div>
+                                            <div class="quality">
+                                                <div class="qualityum">
+                                                    <i class="noselect minus">-</i>
+                                                    <input type="text" name="soluong" class="soluong" id="soluong"value="@cart.Quantity" />
+                                                    <i class="noselect plus">+</i>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <span class="removeItem">
+                                            @Html.ActionLink("X", "RemoveItem", "ShoppingCart", new { id = cart.Product.id_sanpham }, new { onclick = cart })
+                                        </span>
+
+                                    </div>
+                                }
+
+                            </div>
+
+
+                        </div>
+                        <div class="buy-ticket">
+                            <div class="ticket">
+                                <a href="" class="vouchers">
+                                    <i class="fas  fa-ticket"></i>
+                                    Phiếu mua hàng
+
+                                </a>
+                                <i class="fa-solid fa-angle-right"></i>
+                            </div>
+                        </div>
+
+                        <div class="phi_gh">
+                            @{
+                                List<Carts> temp = (List<Carts>)Session["Carts"];
+                                var total = temp.Sum(x => x.Quantity * x.Product.giamoi);
+                            }
+                            <div class="tamtinh">
+                                Thành tiền:
+                            </div>
+                            <div class="money_tamtinh">@Html.FormatValue(total, "{0:#,###.##0}")₫</div>
+                        </div>
+                        <div class="updatecart">
+
+                            <a href="@Url.Action("Index","Home")">
+                                <i class="fas fa-backward"></i> 
+                            Tiếp tục mua hàng</a>
+                            <input type="submit" value="Cập nhật giỏ hàng" class="btns btn--primary ">
+                      
+                        </div>
+
+                        <div class="order-btn ">
+                            <a href="@Url.Action("CheckOut", "ShoppingCart")" class="btns btn--primary btn-ord">ĐẶT HÀNG</a>
+                            <a onclick="opencart()" class="remove-cart">
+                                <i class="fa fa-remove"></i>
+                                Xóa giỏ hàng
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+                        
+                    <div class="no-cart">
+                        <img style="width:100%" src="~/images/Products/empty-cart.jpg" />
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div id="modal-cart" class="modal-cart">
+        <div class="modal-cart-content">
+            <div class="modal-cart-header">
+                <h2>Bạn có muốn xóa hết sản phẩm?</h2>
+            </div>
+            <div class="modal-cart-body">
+                <a href="@Url.Action( "ClearCart", "ShoppingCart")" onclick="toast()">Xóa</a>
+                <a onclick="closecart()" >Hủy</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        const plus = document.querySelectorAll(".plus"),
+            minus = document.querySelectorAll(".minus"),
+            num = document.querySelectorAll(".soluong");
+        for (let i = 0; i < plus.length; i++) {
+            let b = parseInt(num[i].value);
+            plus[i].addEventListener("click", () => {
+                b++;
+                b = (b < 10) ? "0" + b : b;
+                num[i].value = b;
+            });
+            minus[i].addEventListener("click", () => {
+                if (b > 0) {
+                    b--;
+                    b = (b < 10) ? "0" + b : b;
+                    num[i].value = b;
+                }
+            });
+        }
+
+        // toast 
+        //
+        var modal = document.getElementById("modal-cart");
+        function opencart() {
+            modal.style.display = "block";
+        }
+        function closecart() {
+            modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+     
+        $(document).ready(function () {
+            $(".soluong").keypress(function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    $("#errmsg").html("Chỉ được nhập chữ số!").show().delay(3000).fadeOut("slow 0.4s");
+                    return false;
+                }
+            });
+        });
+
+    </script>

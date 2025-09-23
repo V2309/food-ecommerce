@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebApp.Models.ProductInfo>
+<div class="grid__column-9">  
+    <div class="home-filter bg-label-category">
+     @{
+               var name = Session["Product_Group"] as WebApp.Models.Product_Group;        
+              <span class="home-filter__label bg-label">@name.tennhom</span>
+       }
+        
+    </div>
+        <div class="home-product bg-white">
+            <div class="grid__row">
+                <!-- product item -->
+                @foreach (var item in Model)
+                {
+                    <div class="grid__column-2-4">
+                        <a href="@Url.Action("ProductDetail", "Product", new { id = item.id_sanpham })" class="home-product-item">
+                            <div class="product-item__img" style="background-image:url(/images/Products/@item.hinh_sanpham);">
+                            </div>
+                            <h4 class="product-item__name">@item.ten_sanpham</h4>
+                            <div class="product-item__price">
+                                @if (item.giacu != null)
+                                {
+                                    <span class="product-item__price-old">@string.Format("{0:#,##0.000}", item.giacu)₫</span>
+                                }
+                                <span class="product-item__price-new">@string.Format("{0:#,##0.000}", item.giamoi)₫</span>
+                            </div>
+                            <div class="product-item__origin">
+                                @if (item.hinh_quatang != null)
+                                {
+                                    <img src="~/images/Products/@item.hinh_quatang">
+                                }
+                                <span class="product-item__brand"> @item.thongtin_km</span>
+                                <span class="product-item-origin-name">
+                                    @{
+
+                                        if (item.soluong > 0)
+                                        {
+                                            @:Còn hàng
+                                        }
+                                        else
+                                        {
+                                            @:Tạm hết hàng
+                                        }
+                                                                }
+                                                            </span>
+                            </div>
+                        </a>
+                        <a href="@Url.Action("OrderNow", "ShoppingCart", new { id = item.id_sanpham }, null)" class="buyproduct">
+                            CHỌN MUA
+                        </a>
+                    </div>
+                }
+
+                </div>
+        </div>
+   
+    </div>

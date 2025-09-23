@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.title = "Success";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>OrderSuccess</title>
+    <link rel="stylesheet" href="~/Css/base.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div class="success">
+        <div class="card-success">
+            <div class="card-success-heading">
+                <div class="icon-sucess">
+                    <i class="fas fa-check"></i>
+                </div>
+                <span>Đặt hàng thành công!</span>
+            </div>
+            <div class="card-success-body">
+                <span>Đơn hàng của quý khách đã được ghi nhận. GoFood xin cảm ơn quý khách đã tin tưởng và ủng hộ. Chúc quý khách nhiều sức khỏe và gặp nhiều may mắn trong cuộc sống.</span>
+                <a href="@Url.Action("Index", "Home")">Quay về cửa hàng.</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

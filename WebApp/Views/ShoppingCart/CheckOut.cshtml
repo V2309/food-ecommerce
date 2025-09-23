@@ -1,0 +1,125 @@
+﻿@using WebApp.Models;
+@{
+    ViewBag.Title = "Thanh toán";
+}
+
+<div class="app__container">
+    <div class="cart-content">
+
+        @{
+            if (Session["Carts"] != null)
+            {
+                <div class="title-head">
+                    Thông tin hóa đơn
+                </div>
+                <div class="block">
+                 
+                    <table class="table" style="font-size:16px">
+                        <tr>
+                            <td>Name</td>
+                            <td>Quantity</td>
+                            <td>Price</td>
+                            <td>Sub total</td>
+                        </tr>
+                        @foreach (var cart in (List<Carts>)Session["Carts"])
+                        {
+                            double p = Convert.ToDouble(cart.Product.giamoi);
+                            int q = Convert.ToInt32(cart.Quantity);
+                            double subtotal = p * q;
+                            <tr>
+                                <td> @cart.Product.ten_sanpham</td>
+                                <td>@cart.Quantity</td>
+                                <td>@Html.FormatValue(cart.Product.giamoi, "{0:#,##0.000}")₫</td>
+                                <td>@Html.FormatValue(subtotal, "{0:#,##0.000}")₫</td>
+
+                            </tr>
+                        }
+                        <tr>
+                            @{
+                                List<Carts> temp = (List<Carts>)Session["Carts"];
+                                var total = temp.Sum(x => x.Quantity * x.Product.giamoi);
+                            }
+                            <td colspan="2">
+                                &nbsp;
+                            </td>
+                            <td align="right">
+                                Total:
+                            </td>
+                            <td>
+                                @Html.FormatValue(total, "{0:#,##0.000}")₫
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+
+
+            }
+                                            else
+                                            {
+
+                <div class="no-cart">
+                <img style="width:100%" src="~/images/Products/empty-cart.jpg" />
+            </div>
+        }
+                                }
+        <div class="title-head">
+            Thông tin Khách hàng
+        </div>
+        @using (Html.BeginForm("ProcessOrder", "ShoppingCart", FormMethod.Post, new { id = "customer-form" }))
+        {
+            @*  @Html.AntiForgeryToken() *@
+            <div class="form-order">
+
+                <div class="mb-3">
+                    <label>Họ tên khách hàng:</label>
+                    <input type="text" name="cusName" class="form-control" />
+                </div>
+                <div class="mb-3">
+                    <label>Số điện thoại:</label>
+
+                    <input type="text" name="cusPhone" class="form-control" />
+
+                </div>
+                <div class="mb-3">
+                    <label>Emai khách hàng:</label>
+                    <input type="text" name="cusEmail" class="form-control" />
+
+                </div>
+                <div class="mb-3 input-form">
+                    <label>Địa chỉ nhận hàng:</label>
+
+                    <input type="text" name="cusAddress" class="form-control" />
+
+                </div>
+
+                <button class="btns btn--primary btn-ord" type="submit">Hoàn tất mua hàng</button>
+            </div>
+
+
+        }
+
+
+
+
+    </div>
+  
+</div>
+<script type="text/javascript">
+    $("#customer-form").validate({
+        rules: {
+            cusName: {
+                required: true
+            },
+            cusPhone: {
+                required: true
+            },
+            cusEmail: {
+                required: true
+            },
+            cusAddress: {
+                required: true
+            }
+        }
+    });
+</script>

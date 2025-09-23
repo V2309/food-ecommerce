@@ -1,0 +1,34 @@
+﻿@model WebApp.Models.ProductInfo
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Css/base.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <title>Delete</title>
+</head>
+<body>
+    
+    <div class="success">
+        <div class="card-success">
+            <div class="card-success-heading">
+                <h1>Xác nhận xóa sản phẩm <strong style="color:red;">@Model.ten_sanpham</strong> </h1>
+
+            </div>
+
+            <div class="card-success-body">
+                @using (Html.BeginForm("Delete", "Crud", new { id = Model.id_sanpham }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">Xóa</button>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

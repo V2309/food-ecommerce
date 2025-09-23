@@ -1,0 +1,96 @@
+﻿@model WebApp.Models.User_Web
+@{
+    Layout = null;
+}
+@{
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/Css/style.css" / type="text/css">
+    <link rel="stylesheet" href="~/Css/base.css" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.20.0/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" type="text/css">
+</head>
+<body>
+    <div class="app">
+        <div class="header">
+            <div class="grid">
+                <div class="header-main">
+                    <div class="header-logo header-logo1">
+                        <a href=@Url.Action("Index","Home") class="logo__link">
+                            <img src="~/images/logo/go.png" alt="" width="160px" height="40px">
+                        </a>
+                        <div class="header-text">Đăng Nhập GoFood</div>
+                    </div>
+                    <a href=@Url.Action("Support","Home") class="help-center">Bạn cần giúp đỡ?</a>
+                </div>
+            </div>
+        </div>
+        <div class="app__container" style="background:#eee;padding-top:10px;">
+
+            <div class="form">
+                <div class="form-box form-register">
+                    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        <h1>ĐĂNG NHẬP</h1>
+                        <button class="sdt">
+                            <span class="fas fa-mobile-alt"></span>
+                            <span>Số điện thoại</span>
+                        </button>
+                        <button class="fb">
+                            <span class="fab fa-facebook" style=" line-height: 20px;width: 20px; height: 20px;left: 20px; position: absolute; top: 5px;font-size: 15px; text-align: center;"></span>
+                            <span>FACEBOOK</span>
+                        </button>
+                        <button class="gg">
+                            <span class="fab fa-google-plus " style=" line-height: 20px;width: 20px; height: 20px;left: 20px; position: absolute; top: 5px;font-size: 15px; text-align: center;"></span>
+                            <span>GOOGLE</span>
+                        </button>
+                        <p class="ortext">
+                            Hoặc <a href=@Url.Action("Register", "Account") style="color: #0288d1;font-weight: 600;"> đăng ký</a> bằng tài khoản của bạn
+                        </p>
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        @Html.Label("Tên đăng nhập:")
+                        @Html.TextBoxFor(model => model.ten_taikhoan, new { htmlAttributes = new { @class = "input1" } })
+                        @Html.ValidationMessageFor(model => model.ten_taikhoan, "", new { @class = "text-danger" })
+
+
+                        @Html.Label("Mật khẩu:")
+                        @Html.PasswordFor(model => model.matkhau, new { htmlAttributes = new { @class = "input1", @required = "required" } })
+                        @Html.ValidationMessageFor(model => model.matkhau, "", new { @class = "text-danger" })
+
+
+
+                        <button class="fb" type="submit"><span>Đăng nhập ngay</span></button>
+                        <p style="padding-left: 8px;font-size: 10px;color: #707070;">Bằng cách  <a href=@Url.Action("Register", "Account") style="color: #0288d1;font-weight: 600;"> đăng ký</a> hoặc đăng nhập, bạn đồng ý với Chính sách quy định của Fooddy </p>
+
+                    }
+                    <div style="text-align:center;color:red;" class="error">
+                        @ViewBag.LoginFail
+                    </div>
+
+                </div>
+                @*<div class="pic">
+
+                    </div>*@
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<WebApp.Models.ProductInfo>
+@{
+    ViewBag.Title = "Index";
+}
+@{
+    Layout = "~/Views/Shared/_Crud.cshtml";
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Quản Lý Sản Phẩm</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Blank Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <form class="form-inline ml-3">
+            </form>
+            @using (Html.BeginForm("DSSanPham", "AdminPage", FormMethod.Get))
+            {
+                <div class="header-search" style="max-width:300px;">
+                    <div class="input-group input-group-sm">
+                        <input class="form-control form-control-navbar" type="search" placeholder="Tìm kiếm sản phẩm..." aria-label="Search" name="searching" id="searching">
+                        <div class="input-group-append">
+                            <button style="background:grey" class="btn btn-navbar" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+           
+            
+            <a style="margin-bottom:20px;" class="btn btn-primary" href=" @Url.Action("Create", "Crud" )">
+                Create
+            </a>           
+            <table class="table">
+                <tr>
+                    <th>
+                       Tên sản phẩm   </th>
+                    <th>
+                      Giá Cũ
+                    </th>
+                    <th>  Giá Mới
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelitem => item.ten_sanpham)</td>
+
+                        <td>@Html.DisplayFor(modelitem => item.giacu)</td>
+
+                        <td>@Html.DisplayFor(modelitem => item.giamoi)</td>
+
+                        <td>
+                            <a class="btn btn-danger" href="@Url.Action("Edit", "Crud", new { id = item.id_sanpham})">Edit</a>
+                            <a class="btn btn-success" href="@Url.Action("Delete", "Crud", new { id = item.id_sanpham})">Delete</a>
+                            <a class="btn btn-info" href="@Url.Action("Details", "Crud" , new { id = item.id_sanpham})">Detail</a>
+                        </td>
+                    </tr>
+                }
+
+            </table>
+            <ul class="pagination page-position ">
+
+
+                @Html.PagedListPager(Model,
+                page => Url.Action("DSSanPham", "AdminPage", new { page, searching = Request.QueryString["searching"] }),
+                new PagedListRenderOptions { LiElementClasses = new List<string> { "page-link" } })
+
+            </ul>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            Footer
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+
+
+
+
+

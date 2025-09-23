@@ -1,0 +1,127 @@
+﻿@{
+    Layout = "~/Views/Shared/_Crud.cshtml";
+}
+
+@{
+    ViewBag.Title = "Create";
+}
+@model WebApp.Models.ProductInfo
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Thêm sản phẩm</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Blank Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <a >Hướng dẫn thêm một sản phẩm:</a>
+            <p>Id loại sản phẩm nằm giữa: sanpham01 - sanpham10</p>
+            <p>Id nhóm gồm:ca, thibo, thitheo, trung, cu, nam, rau, traicay, dauan, duong, nuocmam, kem, plan, suachua, banhtrang, bot, gao, ngucoc, chao, 
+             hutieu, mi, nui...
+            </p>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body" style="display:flex;justify-content:center;">
+            @using (Html.BeginForm("Create", "Crud", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+
+            {
+                @Html.AntiForgeryToken()
+            <div class="form-horizontal ba">
+                <h4>
+                    Produt
+                </h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.Label("Tên sản phẩm")
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ten_sanpham, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ten_sanpham, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+               <div class="form-group">
+            @Html.Label("Id loại sản phẩm")
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.id_loai_sanpham, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.id_loai_sanpham, "", new { @class = "text-danger" })
+            </div>
+        </div>
+                <div class="form-group">
+                    @Html.Label("Hình sản phẩm")
+                    <div class="col-md-10">
+                        <input type="file" name="imgfile" />
+                        @Html.ValidationMessageFor(model => model.hinh_sanpham, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Giá cũ")
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.giacu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.giacu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Giá mới")
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.giamoi, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.giacu, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.Label("Hình quà tặng(Để Trống)")
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.hinh_quatang, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.hinh_quatang, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Thông tin khuyến mãi")
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.thongtin_km, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.thongtin_km, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Thông tin số lượng")
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.soluong, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.soluong, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label(" ID Nhóm sản phẩm")
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.id_nhomsp, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.id_nhomsp, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-danger">Save </button>
+
+            </div>
+
+            }
+        </div>
+    </div>
+
+</section>
