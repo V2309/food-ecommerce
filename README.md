@@ -1,4 +1,4 @@
-﻿# 🍔 GF Food - Ứng Dụng Thương Mại Điện Tử Thực Phẩm
+﻿# 🍔 GF Food - E-Commerce Food Web Application
 
 <div align="center">
 
@@ -8,73 +8,73 @@
 ![SQL Server](https://img.shields.io/badge/SQL%20Server-2019-red?style=for-the-badge&logo=microsoftsqlserver)
 ![C#](https://img.shields.io/badge/C%23-8.0-blue?style=for-the-badge&logo=csharp)
 
-**Ứng dụng web thương mại điện tử bán thực phẩm được xây dựng trên nền tảng ASP.NET MVC 5**
+**A food e-commerce web application built on ASP.NET MVC 5**
 
 </div>
 
 ---
 
-## 📋 Mục Lục
+## 📋 Table of Contents
 
-- [Tổng Quan Dự Án](#-tổng-quan-dự-án)
-- [Tính Năng Chính](#-tính-năng-chính)
-- [Kiến Trúc Hệ Thống](#-kiến-trúc-hệ-thống)
-- [Cấu Trúc Thư Mục](#-cấu-trúc-thư-mục)
-- [Mô Hình Dữ Liệu](#-mô-hình-dữ-liệu)
+- [Project Overview](#-project-overview)
+- [Key Features](#-key-features)
+- [System Architecture](#-system-architecture)
+- [Folder Structure](#-folder-structure)
+- [Data Model](#-data-model)
 - [Controllers & Routes](#-controllers--routes)
-- [Hệ Thống Phân Quyền](#-hệ-thống-phân-quyền)
-- [Công Nghệ Sử Dụng](#-công-nghệ-sử-dụng)
-- [Yêu Cầu Hệ Thống](#-yêu-cầu-hệ-thống)
-- [Hướng Dẫn Cài Đặt](#-hướng-dẫn-cài-đặt)
-- [Cấu Hình Database](#-cấu-hình-database)
-- [Tài Khoản Mặc Định](#-tài-khoản-mặc-định)
+- [Authorization System](#-authorization-system)
+- [Technologies Used](#-technologies-used)
+- [System Requirements](#-system-requirements)
+- [Installation Guide](#-installation-guide)
+- [Database Configuration](#-database-configuration)
+- [Default Accounts](#-default-accounts)
 
 ---
 
-## 🎯 Tổng Quan Dự Án
+## 🎯 Project Overview
 
-**GF Food** là một ứng dụng web thương mại điện tử chuyên bán thực phẩm, được phát triển bằng **ASP.NET MVC 5** theo mô hình **MVC (Model - View - Controller)**. Ứng dụng cung cấp đầy đủ các chức năng từ hiển thị sản phẩm, quản lý giỏ hàng, đặt hàng cho đến trang quản trị dành cho Admin.
+**GF Food** is a food e-commerce web application developed with **ASP.NET MVC 5** following the **MVC (Model - View - Controller)** pattern. It provides a simple online shop for food products with customer-facing pages and an admin panel for managing products, orders, and blog posts.
 
-| Thông tin | Chi tiết |
+| Information | Details |
 |---|---|
-| **Tên dự án** | GF Food - E-Commerce Food Web App |
-| **Nền tảng** | ASP.NET MVC 5 / .NET Framework 4.7.2 |
-| **Cơ sở dữ liệu** | Microsoft SQL Server (`GF_DataBase`) |
+| **Project name** | GF Food - E-Commerce Food Web App |
+| **Platform** | ASP.NET MVC 5 / .NET Framework 4.7.2 |
+| **Database** | Microsoft SQL Server (`GF_DataBase`) |
 | **ORM** | Entity Framework 5.0.0 (Database First) |
-| **Ngôn ngữ** | C# 8.0, HTML5, CSS3, JavaScript |
+| **Languages** | C# 8.0, HTML5, CSS3, JavaScript |
 | **Namespace** | `WebApp` |
 
 ---
 
-## ✨ Tính Năng Chính
+## ✨ Key Features
 
-### 👤 Người Dùng (Customer)
-- ✅ Đăng ký tài khoản mới
-- ✅ Đăng nhập / Đăng xuất (Forms Authentication)
-- ✅ Xem danh sách sản phẩm với **phân trang** (10 sản phẩm/trang)
-- ✅ **Tìm kiếm sản phẩm** theo tên
-- ✅ Xem chi tiết sản phẩm
-- ✅ Lọc sản phẩm theo **danh mục / nhóm sản phẩm**
-- ✅ **Thêm vào giỏ hàng** (Session-based)
-- ✅ **Quản lý giỏ hàng**: Cập nhật số lượng, xóa sản phẩm, xóa toàn bộ giỏ
-- ✅ **Kiểm tra tồn kho** khi cập nhật giỏ hàng
-- ✅ **Đặt hàng** (Checkout) với thông tin giao hàng
-- ✅ Xem trang Blog / Tin tức
-- ✅ Trang Giới thiệu (About) và Hỗ trợ (Support)
+### 👤 Customer
+- ✅ Register a new account
+- ✅ Login / Logout (Forms Authentication)
+- ✅ View product list with **pagination** (10 products/page)
+- ✅ **Search products** by name
+- ✅ View product details
+- ✅ Filter products by **category / product group**
+- ✅ **Add to cart** (Session-based)
+- ✅ **Manage cart**: update quantity, remove item, clear cart
+- ✅ **Stock check** when updating cart
+- ✅ **Checkout** with shipping information
+- ✅ View Blog / News pages
+- ✅ About and Support pages
 
-### 🛠️ Quản Trị Viên (Admin/User)
-- ✅ **Dashboard** tổng quan với thống kê sản phẩm
-- ✅ **Quản lý sản phẩm**: Thêm, sửa, xóa, xem danh sách (có phân trang & tìm kiếm)
-- ✅ **Upload hình ảnh** sản phẩm
-- ✅ **Quản lý đơn hàng**: Xem danh sách đơn hàng và chi tiết
-- ✅ **Quản lý bài viết** (Blog)
-- ✅ Phân quyền theo vai trò (Role-based Authorization)
+### 🛠️ Admin / User
+- ✅ Overview **Dashboard** with product statistics
+- ✅ **Product management**: Create, Edit, Delete, List (with pagination & search)
+- ✅ **Upload product images**
+- ✅ **Order management**: View orders and order details
+- ✅ **Blog management**
+- ✅ Role-based authorization
 
 ---
 
-## 🏗️ Kiến Trúc Hệ Thống
+## 🏗️ System Architecture
 
-Ứng dụng tuân theo mô hình **MVC (Model-View-Controller)** chuẩn của ASP.NET:
+The application follows the standard **MVC (Model-View-Controller)** architecture used by ASP.NET:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -111,93 +111,93 @@
 
 ---
 
-## 📁 Cấu Trúc Thư Mục
+## 📁 Folder Structure
 
 ```
 WebApp/
 ├── 📁 App_Start/
-│   └── RouteConfig.cs              # Cấu hình routing URL
+│   └── RouteConfig.cs              # URL routing configuration
 │
 ├── 📁 Controllers/
-│   ├── AccountController.cs        # Đăng nhập, đăng ký, đăng xuất
-│   ├── HomeController.cs           # Trang chủ, giới thiệu, blog
-│   ├── ProductController.cs        # Chi tiết & danh mục sản phẩm
-│   ├── ShoppingCartController.cs   # Giỏ hàng & đặt hàng
-│   ├── AdminPageController.cs      # Trang quản trị (dashboard)
-│   └── CrudController.cs           # CRUD sản phẩm (Admin)
+│   ├── AccountController.cs        # Login, Register, Logout
+│   ├── HomeController.cs           # Home, About, Blog
+│   ├── ProductController.cs        # Product details & categories
+│   ├── ShoppingCartController.cs   # Cart & checkout
+│   ├── AdminPageController.cs      # Admin dashboard
+│   └── CrudController.cs           # Product CRUD (Admin)
 │
 ├── 📁 Models/
 │   ├── ProductDataModel.edmx       # Entity Data Model (Database First)
 │   ├── ProductDataModel.Context.cs # DbContext: ProductDBContext
-│   ├── ProductInfo.cs              # Model: Thông tin sản phẩm
-│   ├── TheOrder.cs                 # Model: Đơn hàng
-│   ├── OrderDetail.cs              # Model: Chi tiết đơn hàng
-│   ├── User_Web.cs                 # Model: Người dùng
-│   ├── RoleMaster.cs               # Model: Vai trò (Role)
-│   ├── UserRolesMapping.cs         # Model: Ánh xạ User-Role
-│   ├── Blog.cs                     # Model: Bài viết
-│   ├── Pro_Category.cs             # Model: Loại sản phẩm
-│   ├── Product_Group.cs            # Model: Nhóm sản phẩm
-│   ├── Cart.cs                     # Model: Item trong giỏ hàng
-│   ├── Carts.cs                    # Model: Giỏ hàng
-│   ├── ContactFormModel.cs         # Model: Form liên hệ
-│   ├── UserModel.cs                # ViewModel: Đăng nhập
+│   ├── ProductInfo.cs              # Model: Product information
+│   ├── TheOrder.cs                 # Model: Order
+│   ├── OrderDetail.cs              # Model: Order detail
+│   ├── User_Web.cs                 # Model: User
+│   ├── RoleMaster.cs               # Model: Role
+│   ├── UserRolesMapping.cs         # Model: User-Role mapping
+│   ├── Blog.cs                     # Model: Blog post
+│   ├── Pro_Category.cs             # Model: Product category
+│   ├── Product_Group.cs            # Model: Product group
+│   ├── Cart.cs                     # Model: Cart item
+│   ├── Carts.cs                    # Model: Cart
+│   ├── ContactFormModel.cs         # Model: Contact form
+│   ├── UserModel.cs                # ViewModel: Login
 │   └── UsersRoleProvider.cs        # Custom Role Provider
 │
 ├── 📁 Views/
 │   ├── 📁 Account/
-│   │   ├── Login.cshtml            # Trang đăng nhập
-│   │   ├── Register.cshtml         # Trang đăng ký
-│   │   └── Success.cshtml          # Đăng ký thành công
+│   │   ├── Login.cshtml            # Login page
+│   │   ├── Register.cshtml         # Register page
+│   │   └── Success.cshtml          # Registration success
 │   ├── 📁 Home/
-│   │   ├── Index.cshtml            # Trang chủ (danh sách sản phẩm)
-│   │   ├── About.cshtml            # Trang giới thiệu
-│   │   ├── Blog.cshtml             # Trang blog
-│   │   └── Support.cshtml          # Trang hỗ trợ
+│   │   ├── Index.cshtml            # Home (product list)
+│   │   ├── About.cshtml            # About page
+│   │   ├── Blog.cshtml             # Blog list
+│   │   └── Support.cshtml          # Support page
 │   ├── 📁 Product/
-│   │   ├── ProductCategory.cshtml  # Danh sách theo danh mục
-│   │   └── ProductDetail.cshtml    # Chi tiết sản phẩm
+│   │   ├── ProductCategory.cshtml  # Category list
+│   │   └── ProductDetail.cshtml    # Product detail
 │   ├── 📁 ShoppingCart/
-│   │   ├── Index.cshtml            # Giỏ hàng
-│   │   ├── CheckOut.cshtml         # Thanh toán
-│   │   └── OrderSuccess.cshtml     # Đặt hàng thành công
+│   │   ├── Index.cshtml            # Cart page
+│   │   ├── CheckOut.cshtml         # Checkout
+│   │   └── OrderSuccess.cshtml     # Order success
 │   ├── 📁 AdminPage/
-│   │   ├── Dashboard.cshtml        # Tổng quan quản trị
-│   │   ├── DSSanPham.cshtml        # Danh sách sản phẩm
-│   │   ├── DSDonHang.cshtml        # Danh sách đơn hàng
-│   │   └── DSBaiViet.cshtml        # Danh sách bài viết
+│   │   ├── Dashboard.cshtml        # Admin dashboard
+│   │   ├── DSSanPham.cshtml        # Product list
+│   │   ├── DSDonHang.cshtml        # Order list
+│   │   └── DSBaiViet.cshtml        # Blog list
 │   ├── 📁 Crud/
-│   │   ├── Create.cshtml           # Thêm sản phẩm mới
-│   │   ├── Edit.cshtml             # Chỉnh sửa sản phẩm
-│   │   ├── Details.cshtml          # Xem chi tiết sản phẩm (Admin)
-│   │   └── Delete.cshtml           # Xác nhận xóa sản phẩm
+│   │   ├── Create.cshtml           # Create new product
+│   │   ├── Edit.cshtml             # Edit product
+│   │   ├── Details.cshtml          # Product details (Admin)
+│   │   └── Delete.cshtml           # Delete confirmation
 │   └── 📁 Shared/
-│       └── (Layout & Partials)     # Layout chung, navigation
+│       └── (Layout & Partials)     # Shared layout and partials
 │
-├── 📁 Content/                     # CSS và assets mặc định MVC
-├── 📁 Css/                         # CSS tùy chỉnh
+├── 📁 Content/                     # Default MVC CSS & assets
+├── 📁 Css/                         # Custom CSS
 ├── 📁 Scripts/                     # JavaScript
-├── 📁 js/                          # JavaScript bổ sung
-├── 📁 fonts/                       # Font chữ
-├── 📁 images/                      # Hình ảnh (kể cả ảnh sản phẩm)
-│   └── 📁 Products/                # Ảnh upload của sản phẩm
+├── 📁 js/                          # Additional JavaScript
+├── 📁 fonts/                       # Fonts
+├── 📁 images/                      # Images (including product images)
+│   └── 📁 Products/                # Uploaded product images
 │
 ├── Global.asax                     # Application entry point
 ├── Global.asax.cs                  # Application lifecycle events
-├── Web.config                      # Cấu hình ứng dụng
-├── Web.Debug.config                # Cấu hình Debug
-├── Web.Release.config              # Cấu hình Release
-├── packages.config                 # Danh sách NuGet packages
+├── Web.config                      # Application configuration
+├── Web.Debug.config                # Debug configuration
+├── Web.Release.config              # Release configuration
+├── packages.config                 # NuGet packages list
 └── WebApp.csproj                   # Project file
 ```
 
 ---
 
-## 🗄️ Mô Hình Dữ Liệu
+## 🗄️ Data Model
 
-Ứng dụng sử dụng **Entity Framework 5.0 theo hướng Database First** với cơ sở dữ liệu `GF_DataBase` trên SQL Server.
+The application uses **Entity Framework 5.0 (Database First)** with the `GF_DataBase` on SQL Server.
 
-### Sơ Đồ Quan Hệ (ERD)
+### Entity Relationship Diagram (ERD)
 
 ```
 User_Web (1) ───── (*) UserRolesMapping (*) ───── (1) RoleMaster
@@ -215,24 +215,24 @@ ProductInfo (1) ──── (*) OrderDetail (*) ──── (1) TheOrder
   id_loai_sanpham ──► Pro_Category
   id_nhomsp       ──► Product_Group
 
-Blog (độc lập)
+Blog (independent)
   idBlog / nameBlog / shortContent / mainContent
   dateCurrent / typeBlog / img / isPassing
 ```
 
-### Chi Tiết Các Bảng
+### Table Details
 
-| Bảng | Mô tả | Các trường chính |
+| Table | Description | Main columns |
 |------|--------|-----------------|
-| `ProductInfo` | Sản phẩm | id, tên, giá cũ, giá mới, hình ảnh, số lượng, loại, nhóm |
-| `TheOrder` | Đơn hàng | id, tên đơn, tên KH, SĐT, email, địa chỉ, ngày, trạng thái |
-| `OrderDetail` | Chi tiết đơn | id đơn hàng, id sản phẩm, số lượng, thành tiền |
-| `User_Web` | Tài khoản | id, tên tài khoản, mật khẩu (MD5), SĐT, họ tên |
-| `RoleMaster` | Vai trò | ID, tên vai trò (Admin/User/Customer) |
-| `UserRolesMapping` | Ánh xạ quyền | UserId, RoleId |
-| `Pro_Category` | Loại sản phẩm | id loại, tên loại |
-| `Product_Group` | Nhóm sản phẩm | id nhóm, tên nhóm |
-| `Blog` | Bài viết | id, tiêu đề, tóm tắt, nội dung, ngày, loại, hình |
+| `ProductInfo` | Products | id, name, old price, new price, image, quantity, category, group |
+| `TheOrder` | Orders | id, order name, customer name, phone, email, address, date, status |
+| `OrderDetail` | Order details | order id, product id, quantity, total price |
+| `User_Web` | Accounts | id, username, password (MD5), phone, full name |
+| `RoleMaster` | Roles | ID, role name (Admin/User/Customer) |
+| `UserRolesMapping` | User-role mapping | UserId, RoleId |
+| `Pro_Category` | Product category | category id, category name |
+| `Product_Group` | Product group | group id, group name |
+| `Blog` | Blog posts | id, title, short content, main content, date, type, image |
 
 ---
 
@@ -245,111 +245,111 @@ URL Pattern: {controller}/{action}/{id}
 Default:     Home/Index
 ```
 
-### AccountController — Xác thực người dùng
+### AccountController — Authentication
 
-| Route | Method | Mô tả | Yêu cầu |
+| Route | Method | Description | Access |
 |-------|--------|--------|---------|
-| `/Account/Login` | GET | Hiển thị form đăng nhập | Ẩn danh |
-| `/Account/Login` | POST | Xử lý đăng nhập (MD5 hash) | Ẩn danh |
-| `/Account/Register` | GET | Hiển thị form đăng ký | Ẩn danh |
-| `/Account/Register` | POST | Tạo tài khoản mới | Ẩn danh |
-| `/Account/Logout` | GET | Đăng xuất (User) | Đã đăng nhập |
-| `/Account/LogoutAdmin` | GET | Đăng xuất (Admin) | Đã đăng nhập |
+| `/Account/Login` | GET | Show login form | Anonymous |
+| `/Account/Login` | POST | Handle login (MD5 hash) | Anonymous |
+| `/Account/Register` | GET | Show registration form | Anonymous |
+| `/Account/Register` | POST | Create new account | Anonymous |
+| `/Account/Logout` | GET | Logout (User) | Authenticated |
+| `/Account/LogoutAdmin` | GET | Logout (Admin) | Authenticated |
 
-### HomeController — Trang công khai
+### HomeController — Public pages
 
-| Route | Method | Mô tả |
+| Route | Method | Description |
 |-------|--------|--------|
-| `/Home/Index` | GET | Trang chủ: danh sách sản phẩm, tìm kiếm, phân trang |
-| `/Home/About` | GET | Trang giới thiệu |
-| `/Home/Support` | GET | Trang hỗ trợ / liên hệ |
-| `/Home/Blog` | GET | Danh sách bài viết |
+| `/Home/Index` | GET | Home: product list, search, pagination |
+| `/Home/About` | GET | About page |
+| `/Home/Support` | GET | Support / contact page |
+| `/Home/Blog` | GET | Blog listing |
 
-### ProductController — Sản phẩm
+### ProductController — Products
 
-| Route | Method | Mô tả |
+| Route | Method | Description |
 |-------|--------|--------|
-| `/Product/ProductCategory?idnhom={id}` | GET | Lọc sản phẩm theo nhóm |
-| `/Product/ProductDetail/{id}` | GET | Xem chi tiết sản phẩm |
+| `/Product/ProductCategory?idnhom={id}` | GET | Filter products by group |
+| `/Product/ProductDetail/{id}` | GET | View product details |
 
-### ShoppingCartController — Giỏ hàng
+### ShoppingCartController — Cart
 
-| Route | Method | Mô tả |
+| Route | Method | Description |
 |-------|--------|--------|
-| `/ShoppingCart/Index` | GET | Xem giỏ hàng |
-| `/ShoppingCart/OrderNow/{id}` | GET | Thêm sản phẩm vào giỏ |
-| `/ShoppingCart/RemoveItem/{id}` | GET | Xóa 1 sản phẩm khỏi giỏ |
-| `/ShoppingCart/UpdateCart` | POST | Cập nhật số lượng giỏ hàng |
-| `/ShoppingCart/ClearCart` | GET | Xóa toàn bộ giỏ hàng |
-| `/ShoppingCart/CheckOut` | GET | Trang thanh toán |
-| `/ShoppingCart/ProcessOrder` | POST | Xử lý & lưu đơn hàng |
-| `/ShoppingCart/OrderSuccess` | GET | Trang đặt hàng thành công |
+| `/ShoppingCart/Index` | GET | View cart |
+| `/ShoppingCart/OrderNow/{id}` | GET | Add product to cart |
+| `/ShoppingCart/RemoveItem/{id}` | GET | Remove one item from cart |
+| `/ShoppingCart/UpdateCart` | POST | Update cart quantities |
+| `/ShoppingCart/ClearCart` | GET | Clear entire cart |
+| `/ShoppingCart/CheckOut` | GET | Checkout page |
+| `/ShoppingCart/ProcessOrder` | POST | Process & save order |
+| `/ShoppingCart/OrderSuccess` | GET | Order success page |
 
-### AdminPageController — Quản trị
+### AdminPageController — Administration
 
-| Route | Method | Phân quyền | Mô tả |
+| Route | Method | Roles | Description |
 |-------|--------|-----------|--------|
-| `/AdminPage/Dashboard` | GET | Admin, User, Customer | Dashboard tổng quan |
-| `/AdminPage/DSSanPham` | GET | Admin, User, Customer | Danh sách sản phẩm + tìm kiếm |
-| `/AdminPage/DSDonHang` | GET | Admin, User, Customer | Danh sách đơn hàng |
-| `/AdminPage/DSBaiViet` | GET | Admin, User, Customer | Danh sách bài viết |
+| `/AdminPage/Dashboard` | GET | Admin, User, Customer | Overview dashboard |
+| `/AdminPage/DSSanPham` | GET | Admin, User, Customer | Product list + search |
+| `/AdminPage/DSDonHang` | GET | Admin, User, Customer | Order list |
+| `/AdminPage/DSBaiViet` | GET | Admin, User, Customer | Blog list |
 
-### CrudController — Quản lý sản phẩm
+### CrudController — Product management
 
-| Route | Method | Phân quyền | Mô tả |
+| Route | Method | Roles | Description |
 |-------|--------|-----------|--------|
-| `/Crud/Details/{id}` | GET | Admin, User, Customer | Xem chi tiết sản phẩm |
-| `/Crud/Create` | GET | Admin, User | Hiển thị form thêm mới |
-| `/Crud/Create` | POST | **Admin only** | Lưu sản phẩm mới + upload ảnh |
-| `/Crud/Edit/{id}` | GET | Admin, User | Hiển thị form chỉnh sửa |
-| `/Crud/Edit/{id}` | POST | **Admin only** | Lưu thay đổi sản phẩm |
-| `/Crud/Delete/{id}` | GET | **Admin only** | Xác nhận xóa |
-| `/Crud/Delete/{id}` | POST | **Admin only** | Thực hiện xóa sản phẩm |
+| `/Crud/Details/{id}` | GET | Admin, User, Customer | View product details |
+| `/Crud/Create` | GET | Admin, User | Show create form |
+| `/Crud/Create` | POST | **Admin only** | Save new product + upload image |
+| `/Crud/Edit/{id}` | GET | Admin, User | Show edit form |
+| `/Crud/Edit/{id}` | POST | **Admin only** | Save product changes |
+| `/Crud/Delete/{id}` | GET | **Admin only** | Confirm delete |
+| `/Crud/Delete/{id}` | POST | **Admin only** | Perform product deletion |
 
 ---
 
-## 🔐 Hệ Thống Phân Quyền
+## 🔐 Authorization System
 
-Ứng dụng sử dụng **Forms Authentication** kết hợp với **Custom Role Provider** (`UsersRoleProvider`) được tích hợp vào `Web.config`.
+The application uses **Forms Authentication** combined with a **Custom Role Provider** (`UsersRoleProvider`) configured in `Web.config`.
 
-### Các Vai Trò (Roles)
+### Roles
 
-| Vai trò | Quyền hạn |
+| Role | Permissions |
 |---------|-----------|
-| **Admin** | Toàn quyền: xem, thêm, sửa, **xóa** sản phẩm; quản lý đơn hàng, bài viết |
-| **User** | Xem, thêm, sửa sản phẩm; xem đơn hàng (không được xóa) |
-| **Customer** | Chỉ xem danh sách, dashboard; không thao tác CRUD |
-| **Ẩn danh** | Trang chủ, giới thiệu, blog, xem sản phẩm, giỏ hàng |
+| **Admin** | Full access: view, create, edit, **delete** products; manage orders and blog posts |
+| **User** | View, create, edit products; view orders (no delete) |
+| **Customer** | View product list and dashboard; no CRUD operations |
+| **Anonymous** | Public pages: home, about, blog, view products, cart |
 
-### Luồng Xác Thực
+### Authentication Flow
 
 ```
-Người dùng truy cập trang bảo vệ
+User requests a protected page
         │
         ▼
-Chưa đăng nhập? ──► Redirect đến /Account/Login
+Not authenticated? ──► Redirect to /Account/Login
         │
         ▼
-Nhập tên tài khoản + mật khẩu
+Enter username + password
         │
         ▼
-MD5 hash mật khẩu ──► So sánh với DB
+MD5 hash password ──► Compare with DB
         │
-   Thành công?
+   Success?
         │
    ┌────┴────┐
-  Có        Không
+  Yes       No
    │          │
    ▼          ▼
-SetAuthCookie  Hiển thị lỗi
+SetAuthCookie  Show error
    │
    ├── Admin/User/Customer ──► /AdminPage/Dashboard
-   └── Người dùng thường   ──► /Home/Index
+   └── Regular user         ──► /Home/Index
 ```
 
-### Bảo Mật Mật Khẩu
+### Password Security
 
-Mật khẩu được mã hóa bằng **MD5** trước khi lưu vào database:
+Passwords are hashed with **MD5** before storing in the database:
 
 ```csharp
 public static string GetMD5(string str)
@@ -357,51 +357,51 @@ public static string GetMD5(string str)
     MD5 md5 = new MD5CryptoServiceProvider();
     byte[] fromData = Encoding.UTF8.GetBytes(str);
     byte[] targetData = md5.ComputeHash(fromData);
-    // Chuyển đổi byte array thành chuỗi hex...
+    // Convert byte array to hex string...
 }
 ```
 
-> ⚠️ **Lưu ý bảo mật**: MD5 không còn được khuyến nghị cho production. Nên nâng cấp lên BCrypt hoặc PBKDF2.
+> ⚠️ **Security note**: MD5 is not recommended for production. Consider upgrading to BCrypt or PBKDF2.
 
 ---
 
-## 🛒 Luồng Hoạt Động Giỏ Hàng
+## 🛒 Cart Workflow
 
-Giỏ hàng được lưu trữ trong **ASP.NET Session** (không cần đăng nhập):
+The shopping cart is stored in **ASP.NET Session** (no login required):
 
 ```
-Người dùng xem sản phẩm
+User views products
         │
         ▼
-Click "Thêm vào giỏ" ──► /ShoppingCart/OrderNow/{id}
+Click "Add to cart" ──► /ShoppingCart/OrderNow/{id}
         │
         ▼
-Kiểm tra Session["Carts"]
+Check Session["Carts"]
         │
-  Có trong giỏ?
+  Already in cart?
   ┌─────┴──────┐
- Có           Không
+ Yes           No
   │              │
   ▼              ▼
-Tăng số lượng  Thêm mới vào List<Carts>
+Increase qty   Add new item to List<Carts>
         │
         ▼
-Xem giỏ hàng (/ShoppingCart/Index)
+View cart (/ShoppingCart/Index)
         │
-Cập nhật số lượng? ──► Kiểm tra tồn kho
+Update quantities? ──► Check stock
         │                    │
-        │              Không đủ? ──► Hiển thị lỗi
+        │              Not enough? ──► Show error
         ▼
 Checkout (/ShoppingCart/CheckOut)
         │
-Nhập thông tin (tên, SĐT, email, địa chỉ)
+Enter info (name, phone, email, address)
         │
         ▼
 POST /ShoppingCart/ProcessOrder
         │
-Lưu TheOrder + OrderDetails vào DB
+Save TheOrder + OrderDetails to DB
         │
-Xóa Session giỏ hàng
+Clear Session cart
         │
         ▼
 /ShoppingCart/OrderSuccess
@@ -409,96 +409,96 @@ Xóa Session giỏ hàng
 
 ---
 
-## 💻 Công Nghệ Sử Dụng
+## 💻 Technologies Used
 
 ### Backend
 
-| Công nghệ | Phiên bản | Mục đích |
+| Technology | Version | Purpose |
 |-----------|-----------|---------|
-| ASP.NET MVC | 5.2.7 | Web framework chính |
+| ASP.NET MVC | 5.2.7 | Main web framework |
 | .NET Framework | 4.7.2 | Runtime |
 | Entity Framework | 5.0.0 | ORM - Database First |
-| C# | 8.0 | Ngôn ngữ lập trình |
-| PagedList | 1.17.0 | Phân trang danh sách |
-| PagedList.Mvc | 4.5.0 | Helper phân trang cho MVC Views |
-| Forms Authentication | Built-in | Xác thực người dùng |
-| Custom RoleProvider | Custom | Phân quyền tùy chỉnh |
-| MD5CryptoServiceProvider | Built-in | Mã hóa mật khẩu |
+| C# | 8.0 | Programming language |
+| PagedList | 1.17.0 | List pagination |
+| PagedList.Mvc | 4.5.0 | MVC pagination helper |
+| Forms Authentication | Built-in | User authentication |
+| Custom RoleProvider | Custom | Role-based authorization |
+| MD5CryptoServiceProvider | Built-in | Password hashing |
 
 ### Frontend
 
-| Công nghệ | Mục đích |
+| Technology | Purpose |
 |-----------|---------|
 | Razor View Engine | Template engine (.cshtml) |
-| HTML5 | Cấu trúc trang |
-| CSS3 | Giao diện |
-| JavaScript | Tương tác người dùng |
+| HTML5 | Page structure |
+| CSS3 | Styling |
+| JavaScript | Client interactions |
 | Bootstrap | Responsive layout |
 
 ### Database
 
-| Thành phần | Chi tiết |
+| Component | Details |
 |-----------|---------|
 | DBMS | Microsoft SQL Server |
-| Tên Database | GF_DataBase |
-| Kết nối | Integrated Security (Windows Auth) |
+| Database name | GF_DataBase |
+| Connection | Integrated Security (Windows Auth) |
 | Provider | System.Data.EntityClient |
 
 ---
 
-## ⚙️ Yêu Cầu Hệ Thống
+## ⚙️ System Requirements
 
-### Phát Triển (Development)
+### Development
 
 - **OS**: Windows 10/11
 - **IDE**: Visual Studio 2019 / 2022
 - **Runtime**: .NET Framework 4.7.2
-- **Database**: SQL Server 2016+ (hoặc SQL Server Express)
-- **RAM**: Tối thiểu 4GB (khuyến nghị 8GB+)
+- **Database**: SQL Server 2016+ (or SQL Server Express)
+- **RAM**: Minimum 4GB (recommended 8GB+)
 
-### Môi Trường Chạy (Runtime)
+### Runtime
 
-- **Web Server**: IIS 8.0+ hoặc IIS Express
-- **SQL Server**: 2016 trở lên
-- **.NET Framework**: 4.7.2 trở lên
+- **Web Server**: IIS 8.0+ or IIS Express
+- **SQL Server**: 2016 or newer
+- **.NET Framework**: 4.7.2 or newer
 
 ---
 
-## 🚀 Hướng Dẫn Cài Đặt
+## 🚀 Installation Guide
 
-### Bước 1: Clone/Download dự án
+### Step 1: Clone / Download the project
 
 ```bash
 git clone <repository-url>
-# hoặc giải nén file zip vào thư mục mong muốn
+# or unzip the project zip into your desired folder
 ```
 
-### Bước 2: Mở Project trong Visual Studio
+### Step 2: Open the project in Visual Studio
 
-1. Mở Visual Studio
-2. Chọn **File → Open → Project/Solution**
-3. Chọn file `WebApp.csproj` hoặc `.sln` trong thư mục dự án
+1. Open Visual Studio
+2. Choose **File → Open → Project/Solution**
+3. Select `WebApp.csproj` or the `.sln` file in the project folder
 
-### Bước 3: Khôi phục NuGet Packages
+### Step 3: Restore NuGet Packages
 
 ```bash
-# Trong Package Manager Console (Tools → NuGet Package Manager → Package Manager Console)
+# In Package Manager Console (Tools → NuGet Package Manager → Package Manager Console)
 Update-Package -reinstall
 
-# Hoặc nhấn chuột phải vào Solution → Restore NuGet Packages
+# Or right-click the Solution → Restore NuGet Packages
 ```
 
-### Bước 4: Cấu hình Database (xem phần tiếp theo)
+### Step 4: Configure the Database (see next section)
 
-### Bước 5: Build & Run
+### Step 5: Build & Run
 
-- Nhấn **F5** để chạy ứng dụng trong chế độ Debug
-- Hoặc **Ctrl+F5** để chạy không debug
-- Ứng dụng sẽ mở trên `http://localhost:{port}/`
+- Press **F5** to run the app in Debug mode
+- Or **Ctrl+F5** to run without debugging
+- The app will open at `http://localhost:{port}/`
 
 ---
 
-## 🗃️ Cấu Hình Database
+## 🗃️ Database Configuration
 
 ### Connection String (Web.config)
 
@@ -519,17 +519,17 @@ Update-Package -reinstall
 </connectionStrings>
 ```
 
-### Thiết Lập Database
+### Database Setup
 
-**1. Mở SQL Server Management Studio (SSMS)**
+**1. Open SQL Server Management Studio (SSMS)**
 
-**2. Tạo database `GF_DataBase`:**
+**2. Create the `GF_DataBase` database:**
 
 ```sql
 CREATE DATABASE GF_DataBase;
 ```
 
-**3. Chạy script tạo bảng:**
+**3. Run the table creation script:**
 
 ```sql
 USE GF_DataBase;
@@ -615,74 +615,74 @@ CREATE TABLE Blog (
 );
 ```
 
-**4. Thay đổi `data source`** trong `Web.config` nếu SQL Server không ở localhost:
+**4. Change the `data source`** in `Web.config` if SQL Server is not on localhost:
 
 ```xml
-data source=TEN_SERVER_SQL;  <!-- Thay "." bằng tên server của bạn -->
+data source=YOUR_SQL_SERVER_NAME;  <!-- Replace "." with your server name -->
 ```
 
 ---
 
-## 👥 Tài Khoản Mặc Định
+## 👥 Default Accounts
 
-Thêm dữ liệu mẫu vào database:
+Add sample data to the database:
 
 ```sql
--- Thêm Roles
+-- Add Roles
 INSERT INTO RoleMaster (RollName) VALUES ('Admin');
 INSERT INTO RoleMaster (RollName) VALUES ('User');
 INSERT INTO RoleMaster (RollName) VALUES ('Customer');
 
--- Thêm tài khoản Admin (mật khẩu: admin123)
+-- Add Admin account (password: admin123)
 -- MD5("admin123") = 0192023a7bbd73250516f069df18b500
 INSERT INTO User_Web (ten_taikhoan, matkhau, hoTen, SDT)
-VALUES ('Admin', '0192023a7bbd73250516f069df18b500', 'Quản Trị Viên', '0900000000');
+VALUES ('Admin', '0192023a7bbd73250516f069df18b500', 'Administrator', '0900000000');
 
--- Gán quyền Admin
+-- Assign Admin role
 INSERT INTO UserRolesMapping (UserId, RoleId)
 VALUES (1, 1);
 ```
 
-| Tài khoản | Mật khẩu | Vai trò | Redirect sau đăng nhập |
+| Account | Password | Role | Redirect after login |
 |-----------|----------|---------|----------------------|
 | `Admin` | *(MD5 hash)* | Admin | `/AdminPage/Dashboard` |
 | `User` | *(MD5 hash)* | User | `/AdminPage/Dashboard` |
 | `Customer` | *(MD5 hash)* | Customer | `/AdminPage/Dashboard` |
-| Tài khoản khác | *(MD5 hash)* | - | `/Home/Index` |
+| Other accounts | *(MD5 hash)* | - | `/Home/Index` |
 
 ---
 
-## 📂 Thư Mục Upload Ảnh
+## 📂 Upload Folder
 
-Ảnh sản phẩm được upload vào:
+Product images are uploaded to:
 
 ```
 ~/images/Products/
 ```
 
-Đảm bảo thư mục này **tồn tại** và IIS có **quyền ghi** vào thư mục này.
+Make sure this folder **exists** and IIS has **write** permission to it.
 
 ---
 
-## 🐛 Các Vấn Đề Thường Gặp
+## 🐛 Common Issues
 
-| Vấn đề | Nguyên nhân | Giải pháp |
+| Issue | Cause | Solution |
 |--------|-------------|-----------|
-| Lỗi kết nối Database | Connection string sai | Kiểm tra `Web.config`, đảm bảo SQL Server đang chạy |
-| Không upload được ảnh | Thiếu quyền ghi | Cấp quyền Write cho IIS_IUSRS vào thư mục `~/images/Products/` |
-| Lỗi 404 sau đăng nhập | Route chưa khớp | Kiểm tra `RouteConfig.cs` |
-| Session giỏ hàng bị mất | Session timeout | Tăng `sessionState timeout` trong `Web.config` |
-| Lỗi phân quyền | RoleProvider không load | Kiểm tra cấu hình `roleManager` trong `Web.config` |
+| Database connection error | Wrong connection string | Check `Web.config`, ensure SQL Server is running |
+| Cannot upload images | Missing write permission | Grant Write permission to IIS_IUSRS on `~/images/Products/` |
+| 404 error after login | Route mismatch | Check `RouteConfig.cs` |
+| Session cart lost | Session timeout | Increase `sessionState timeout` in `Web.config` |
+| Authorization error | RoleProvider not loaded | Check `roleManager` configuration in `Web.config` |
 
 ---
 
-## 📝 Ghi Chú Phát Triển
+## 📝 Development Notes
 
-- **ORM**: Sử dụng **Database First** — khi thay đổi schema DB cần regenerate EDMX
-- **Session**: Giỏ hàng lưu trong `Session["Carts"]` — mất khi restart server hoặc session hết hạn
-- **Phân trang**: Sử dụng thư viện **PagedList.Mvc** với kích thước trang mặc định là **10 items**
-- **Upload ảnh**: Chỉ lưu tên file, không lưu đường dẫn đầy đủ
-- **Anti-Forgery**: Được bật cho các action POST quan trọng (`[ValidateAntiForgeryToken]`)
+- **ORM**: Using **Database First** — regenerate the EDMX when DB schema changes
+- **Session**: Cart is stored in `Session["Carts"]` — will be lost on server restart or session expiration
+- **Pagination**: Uses **PagedList.Mvc** with default page size **10 items**
+- **Image upload**: Only file name is stored, not full path
+- **Anti-Forgery**: Enabled for important POST actions (`[ValidateAntiForgeryToken]`)
 
 ---
 
@@ -690,6 +690,6 @@ VALUES (1, 1);
 
 **© 2024 GF Food - E-Commerce Food Web Application**
 
-*Xây dựng với ASP.NET MVC 5 | .NET Framework 4.7.2 | SQL Server*
+*Built with ASP.NET MVC 5 | .NET Framework 4.7.2 | SQL Server*
 
 </div>
